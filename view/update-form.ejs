@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+    <body>
+
+        <%- include('./partials/nav') %>
+
+            <div class="content">
+                <h2>Update BLOG</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta atque eveniet eius saepe facere rem accusantium doloribus, voluptate qui fuga temporibus magni debitis accu</p>
+
+                <form action="/blogs/save-updated" method="post">
+                    <div>
+                        <label for="Title">Enter title</label>
+                        <input type="text" name="Title" value="<%- blog.title %> ">
+                    </div>
+
+                    <div>
+                        <label for="Snippet">Enter Snippet</label>
+                        <input type="text" name="Snippet" value="<%- blog.snippet %> ">
+                    </div>
+
+                    <div>
+                        <label for="Body">Enter body content</label>
+                        <textarea name="Body" id="Body_content" cols="30" rows="10"><%- blog.body %></textarea>
+
+                        <input type="text" name="ID" value="<%- blog.id %>" style="display: none;">
+                    </div>
+
+                    <button>Submit</button>
+                </form>
+            </div>
+
+            <%- include('./partials/footer') %>
+    </body>
+
+</html>

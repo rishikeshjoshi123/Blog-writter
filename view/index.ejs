@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+    <body>
+
+        <%- include('./partials/nav') %>
+
+            <div class="content">
+                <div class="index_container">
+                    <% if(blogs.length > 0) { %>
+                        <% blogs.forEach(
+                    (blog)=>{ %>
+                            <div class="card">
+
+                                <h3 onclick="showFullContent(this);" data-ID="<%- blog.id%>">
+                                    <%- blog.title %>
+                                </h3>
+                                <p>
+                                    <%- blog.snippet %>
+                                </p>
+                                <div class="controllers">
+                                    <button onclick="deleteThis(`${this.id}`)" id="<%- blog.id%>" class="controller_button delete_button">Delete</button>
+                                    <button onclick="updateThis(this)" data-ID="<%- blog.id%>" class="controller_button update_button">Update</button>
+                                </div>
+
+                            </div>
+
+                            <%  }) %>
+                                <% } 
+                                else {%>
+                                    <p style="display: flex; justify-content:center; ">
+                                        <%- 'Blog list is empty. Create new blogs.' %>
+                                    </p>
+                                    <% }%>
+                </div>
+
+
+            </div>
+
+            <%- include('./partials/footer') %>
+
+
+
+                <script>
+                    function updateThis(T) {
+                        const id = T.getAttribute("data-ID");
+                        const endpoint = `/blogs/update-form/${id}`;
+                        console.log('clicked on update button. ID is', id);
+
+                        fetch(endpoint, {
+                            method: 'get'
+                        }).then((result) => {
+                            console.log('returned from update page route, result.url is', result.url);
+                            window.location.href = result.url;
+                        }).catch(err => {
+                            console.log('Failed in opening update-page', err);
+                        })
+
+                    }
+
+                    function showFullContent(T) {
+
+
+                        const id = T.getAttribute("data-ID");
+                        const endpoint = `/blogs/show-full-content/${id}`;
+                        console.log('Clicked on heading, endpoint is', endpoint);
+
+                        fetch(endpoint, {
+                                method: 'get'
+                            })
+                            .then((res) => {
+                                console.log('Fetching successfull', res);
+                                window.location.href = res.url;
+                            })
+                            .catch(err => {
+                                console.log('Failed in fetching article from DB.', err);
+                            })
+                    }
+
+                    function deleteThis(id) {
+
+                        console.log('pressed delete button. and id here is', id);
+                        const endpoint = `/blogs/delete/${id}`;
+
+                        fetch(endpoint, {
+                                method: 'DELETE'
+                            })
+                            .then((response) => {
+                                return response.json();
+
+                            })
+                            .then((result) => {
+                                window.location.href = result.redirect;
+                            })
+                            .catch(err => console.log('Error occured in deleting. Error:', err));
+                    }
+                </script>
+    </body>
+
+</html>

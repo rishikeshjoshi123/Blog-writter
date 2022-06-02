@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+    <body>
+
+        <%- include('./partials/nav') %>
+
+            <div class="content">
+                <div class="container">
+
+                    <h2>
+                        <%- blog.title %>
+                    </h2>
+                    <p>
+                        <%- blog.snippet %>
+                    </p>
+                    <p class="container_body">
+                        <%- blog.body %>
+                    </p>
+                </div>
+            </div>
+
+            <%- include('./partials/footer') %>
+    </body>
+
+</html>

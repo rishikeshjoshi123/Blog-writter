@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head') %>
+
+    <body>
+
+        <%- include('./partials/nav') %>
+
+            <div class="content">
+                <h2>Create a new BLOG</h2>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta atque eveniet eius saepe facere rem accusantium doloribus, voluptate qui fuga temporibus magni debitis accu</p>
+
+                <form action="/blogs/create-new/" method="post">
+                    <div>
+                        <label for="Title">Enter title</label>
+                        <input type="text" name="Title">
+                    </div>
+
+                    <div>
+                        <label for="Snippet">Enter Snippet</label>
+                        <input type="text" name="Snippet">
+                    </div>
+
+                    <div>
+                        <label for="Body">Enter body content</label>
+                        <textarea name="Body" id="Body_content" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <button>Submit</button>
+                </form>
+            </div>
+
+            <%- include('./partials/footer') %>
+    </body>
+
+</html>
