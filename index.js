@@ -19,7 +19,7 @@ const dbURI = 'mongodb+srv://test_user:test_1234@cluster0.kedxy.mongodb.net/?ret
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         console.log('Connected to mongoDB database!')
-        app.listen(3000, () => {
+        app.listen(process.env.PORT || 3000, () => {
             console.log('Your NodeJs server started!');
         })
     })
