@@ -67,11 +67,15 @@ router.delete('/delete/:id', (req, res) => {
 
 router.get('/update-form/:id', async(req, res) => {
 
+    try {
+        const id = req.params.id;
+        const blog = await findInDB(id);
 
-    const id = req.params.id;
-    const blog = await findInDB(id);
+        res.render('update-form', { title: `Update ${blog.title}`, blog });
+    } catch (err) {
+        console.log('Error occured while finding object in DB.', err);
+    }
 
-    res.render('update-form', { title: `Update ${blog.title}`, blog });
 });
 
 router.post('/save-updated', async(req, res) => {
