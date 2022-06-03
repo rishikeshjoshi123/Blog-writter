@@ -27,19 +27,24 @@ router.get('/create-new', (req, res) => {
     res.render('create-new', { title: 'Write new blog' });
 })
 
-router.post('/create-new', (req, res) => {
+router.post('/create-new', async(req, res) => {
 
-    const blog = new Blog({
-        title: `${req.body.Title}`,
-        snippet: `${req.body.Snippet}`,
-        body: `${req.body.Body}`,
-    });
+    try {
+        const blog = new Blog({
+            title: `${req.body.Title}`,
+            snippet: `${req.body.Snippet}`,
+            body: `${req.body.Body}`,
+        });
 
-    blog.save()
-        .then(result => console.log(result.id))
-        .catch(err => console.log('Cant save document. Error: ', err));
+        const result = await blog.save();
+        console.log('redirecting to / endpoint after succesfully creating new blog. id=', result.id);
 
-    res.redirect('/blogs/');
+        // res.render('index', { title: 'Home', blogs: result });
+        res.redirect('/');
+    } catch (err) {
+        console.log('Cant save document. Error: ', err);
+    }
+
 })
 
 router.get('/show-full-content/:id', (req, res) => {
@@ -55,7 +60,7 @@ router.delete('/delete/:id', (req, res) => {
 
     Blog.findByIdAndDelete(id)
         .then((result) => {
-            res.json({ redirect: '/blogs/' });
+            res.json({ redirect: '/' });
         }).catch(err => console.log('Error occured in deleting. Erro: ', err));
 
 });
@@ -83,7 +88,7 @@ router.post('/save-updated', async(req, res) => {
     try {
         let result = await Blog.findByIdAndUpdate(id, blog);
 
-        res.redirect(`/blogs/show-full-content/${id}`);
+        res.redirect(`/show-full-content/${id}`);
     } catch (err) { console.error(err); }
 
 

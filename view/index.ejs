@@ -46,7 +46,7 @@
                 <script>
                     function updateThis(T) {
                         const id = T.getAttribute("data-ID");
-                        const endpoint = `/blogs/update-form/${id}`;
+                        const endpoint = `/update-form/${id}`;
                         console.log('clicked on update button. ID is', id);
 
                         fetch(endpoint, {
@@ -64,7 +64,7 @@
 
 
                         const id = T.getAttribute("data-ID");
-                        const endpoint = `/blogs/show-full-content/${id}`;
+                        const endpoint = `/show-full-content/${id}`;
                         console.log('Clicked on heading, endpoint is', endpoint);
 
                         fetch(endpoint, {
@@ -82,7 +82,7 @@
                     function deleteThis(id) {
 
                         console.log('pressed delete button. and id here is', id);
-                        const endpoint = `/blogs/delete/${id}`;
+                        const endpoint = `/delete/${id}`;
 
                         fetch(endpoint, {
                                 method: 'DELETE'

@@ -26,7 +26,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch(err => console.log(err));
 
 //Blog routes
-app.use('/blogs', blogRoutes);
+app.use('/', blogRoutes);
 
 
 
